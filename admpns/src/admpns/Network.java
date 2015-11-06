@@ -10,5 +10,7 @@ package admpns;
  * @author flakoloko32
  */
 public class Network {
+    private String networkOwner;
+    private String networkName;
     
 }
