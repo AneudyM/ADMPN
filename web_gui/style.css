@@ -1,0 +1,13 @@
+/* Base style for ADMPNS */
+
+h2 {
+	color: cornflowerblue;
+	font-weight: bold;
+}
+
+header {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	text-align: center;
+	border: 1px solid #000000;
+}
+
