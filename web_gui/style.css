@@ -5,9 +5,17 @@ h2 {
 	font-weight: bold;
 }
 
-header {
+
+#main {
+    margin: auto;
+    width: 600px;
+    text-align: center;
+}
+
+#header {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	text-align: center;
 	border: 1px solid #000000;
 }
+
 
