@@ -17,7 +17,6 @@ public class Switch {
     private String eth2;
     private String eth3;
     
-    
     public void setHostname(String h){
         this.hostname = h;
     }
