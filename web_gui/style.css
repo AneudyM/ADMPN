@@ -12,10 +12,19 @@ h2 {
     text-align: center;
 }
 
-#header {
+#inc_header {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	text-align: center;
 	border: 1px solid #000000;
+}
+
+#inc_navmenu {
+    padding: 10px;
+    border: 1px solid #000000;
+}
+
+#inc_home {
+    border: 1px solid #000000;
 }
 
 
