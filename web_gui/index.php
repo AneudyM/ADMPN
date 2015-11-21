@@ -6,8 +6,8 @@
     </head>
     <body>
         <div id="main">
-            <?php include("include/inc_header.html"); ?><br>
-            <?php include("include/inc_navmenu.html"); ?><br>
+            <?php include('include/inc_header.html'); ?><br>
+            <?php include('include/inc_navmenu.html'); ?><br>
             <?php
                 if (isset($_GET['content'])) {
                     switch ($_GET['content']) {
@@ -22,9 +22,8 @@
                             break;
                     }
                 }
-            ?>
-            
-        
+            ?><br>
+            <?php include ('include/inc_footer.html'); ?>
         </div>
     </body>
 </html>
