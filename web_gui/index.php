@@ -12,7 +12,7 @@
                 if (isset($_GET['content'])) {
                     switch ($_GET['content']) {
                         case 'Create new Network':
-                            include ('include/inc_new_network.html');
+                            include ('include/inc_questionnaire.html');
                             break;
                         case 'View existing Networks':
                             include ('view_networks.php');
