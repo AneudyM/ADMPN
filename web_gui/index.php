@@ -15,7 +15,7 @@
                             include ('include/inc_new_network.html');
                             break;
                         case 'View existing Networks':
-                            include ('include/inc_existing_network.html');
+                            include ('view_networks.php');
                             break;
                         default:
                             include ('include/inc_home.html');
