@@ -8,6 +8,7 @@
     echo "The network <b>".$networkOwner."</b> has been successfully created.";
     echo "<br>";
     echo "Description: <b>".$networkDescription."</b>.";
+    include ('include/inc_questionnaire.html');
 ?>
 
 </div>
