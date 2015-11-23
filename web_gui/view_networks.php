@@ -9,17 +9,19 @@ require_once("include/inc_database_info.php");
 
 <?php
 $TableName="Network";
-$sqlString="SELECT * FROM $TableName";
+$sqlString= "SELECT * FROM $TableName";
 $queryResult =$DBConnect->query($sqlString);
-echo "<table border='1' cellpadding = '5'><tr><th>Network ID</th>"
+
+echo "<table border='1' cellpadding='5'>\n <tr><th>Network ID</th>"
         . "<th>Network Owner</th>"
-        . "<th>Number of Subnets</th><th>Description</th></tr></table>";
-while (($row = $queryResult->fetch_row()) !==FALSE){
-    echo"<tr><td>{$row["network_id"]}</td>";
-    echo"<tr><td>{$row["network_owner"]}</td>";
-    echo"<tr><td>{$row["number_of_subnets"]}</td>";
-    echo"<tr><td>{$row["description"]}</td>";
-    
+        . "<th>Number of Subnets</th><th>Description</th></tr>";
+
+while ($row = $queryResult->fetch_assoc()){
+    echo"<tr><td>" . $row["network_id"]. "</td>
+        <td>" . $row["network_owner"]. "</td>
+        <td>" . $row["number_of_subnets"]. "</td>
+        <td>" . $row["description"]. "</td></tr>\n";
+            
 }
  echo"</table>";
 ?>
