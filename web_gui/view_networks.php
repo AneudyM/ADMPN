@@ -9,7 +9,7 @@ require_once("include/inc_database_info.php");
 
 <?php
 
-$TableName="Network";
+$TableName="NETWORK";
 $sqlString= "SELECT * FROM $TableName";
 $queryResult =$DBConnect->query($sqlString);
 
@@ -18,11 +18,11 @@ echo "<table border='1' cellpadding='5'>\n <tr><th>Network ID</th>"
         . "<th>Number of Subnets</th><th>Description</th></tr>";
 
 while ($row = $queryResult->fetch_assoc()){
-    $networkID = $row["network_id"];
+    $networkID = $row["networkId"];
     echo"<tr><td> <a href='view_subnet.php?network=$networkID'>" . $networkID. " </a></td>
-        <td>" . $row["network_owner"]. "</td>
-        <td>" . $row["number_of_subnets"]. "</td>
-        <td>" . $row["description"]. "</td></tr>\n";
+        <td>" . $row["networkOwner"]. "</td>
+        <td>" . $row["numberOfSubnets"]. "</td>
+        <td>" . $row["networkDescription"]. "</td></tr>\n";
             
 }
  echo"</table>";

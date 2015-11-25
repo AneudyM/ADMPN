@@ -15,8 +15,8 @@ if ($DBConnect->connect_errno){
 <?php
     $networkOwner = $_POST['networkOwner'];
     $networkDescription = $_POST['networkDescription'];
-    $TableName = "Network";
-    $sqlString = "INSERT INTO $TableName(network_owner, description) VALUES('$networkOwner', '$networkDescription')";
+    $TableName = "NETWORK";
+    $sqlString = "INSERT INTO $TableName(networkOwner, networkDescription) VALUES('$networkOwner', '$networkDescription')";
     $queryResult = $DBConnect->query($sqlString);
     
     include ('include/inc_header.html');

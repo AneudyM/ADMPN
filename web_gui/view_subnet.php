@@ -16,7 +16,7 @@ require_once("include/inc_database_info.php");
     $queryResult = $DBConnect->query($sqlstring); 
     
     while ($row = $queryResult->fetch_assoc()){
-    echo "<p> Network:  ".$row ["network_owner"]."</p>";
+    echo "<p> Network:  ".$row ["networkOwner"]."</p>";
     }
     echo "<p><b> Topologies of the selected Network </b></p>";
     echo "<table border='1' cellpadding='5'>\n <tr><th>Number</th>"
@@ -25,7 +25,7 @@ require_once("include/inc_database_info.php");
         . "<th>Active</th><th>Decription</th></tr>";
     
     
-?>
+?>  
     
 <?php
 $DBConnect->close();
