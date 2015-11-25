@@ -2,7 +2,6 @@
 require_once("include/inc_database_info.php");
 ?>
 
-
 <link rel="stylesheet" type="text/css" href="style.css" media="screen">
 <div id="main">
     <?php include('include/inc_header.html') ?>

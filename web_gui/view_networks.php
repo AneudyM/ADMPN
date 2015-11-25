@@ -2,11 +2,12 @@
 require_once("include/inc_database_info.php");
 ?>
 
+<link rel="stylesheet" type="text/css" href="style.css" media="screen">
 <form name="searchbox" action="view_networks.php">
     <input name="search" type="text" placeholder="Search" />
     <input name="search_button" type="button" value="Search" />
 </form>
-
+<br>
 
 <?php
 $TableName="NETWORK";
