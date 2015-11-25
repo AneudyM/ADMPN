@@ -27,7 +27,8 @@ require_once("include/inc_database_info.php");
         . "<th>Active</th></tr>";
     
     while ($row = $queryTopology->fetch_assoc()){
-    echo"<tr><td>" . $row["topologyId"]. " </td>
+    echo"<tr><td>" . $row["topologyId"]. " <a href='update_topology.php?edit="
+            .$row["topologyId"]."'>Update Value</a> </td>
         <td>" . $row["topologyName"]. "</td>
         <td>" . $row["topologyIP"]. "</td>
             <td>" . $row["topologyDescription"]. "</td>

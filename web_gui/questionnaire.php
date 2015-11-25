@@ -19,15 +19,15 @@ $sqlString = "select networkId from NETWORK
     order by networkId desc
     limit 1" ;
 $queryResult = $DBConnect->query($sqlString);
-while ($row = $queryResult->fetch_assoc()){
-    $lastID = $row ["networkId"];    
-    }    
+$row  = $queryResult->fetch_array();
+  
 $updateNetwork = "update NETWORK
         set numberOfSubnets='$number_vlan'
-        where networkId='$lastID'";
+        where networkId='".$row ["networkId"]."'";
 $query = $DBConnect->query($updateNetwork);
 ?>
 
 <?php
 $DBConnect->close();
 ?>
+

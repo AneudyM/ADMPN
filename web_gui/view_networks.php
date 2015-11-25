@@ -9,6 +9,7 @@ require_once("include/inc_database_info.php");
 </form>
 <br>
 
+
 <?php
 $TableName="NETWORK";
 $sqlString= "SELECT * FROM $TableName";
@@ -27,9 +28,7 @@ while ($row = $queryResult->fetch_assoc()){
             
 }
  echo"</table>";
-?>
 
-<?php
 $DBConnect->close();
 ?> 
 
