@@ -7,13 +7,13 @@ require_once("include/inc_database_info.php");
     <input name="search_button" type="button" value="Search" />
 </form>
 
-<?php
 
+<?php
 $TableName="NETWORK";
 $sqlString= "SELECT * FROM $TableName";
 $queryResult =$DBConnect->query($sqlString);
-
-echo "<table border='1' cellpadding='5'>\n <tr><th>Network ID</th>"
+  
+echo "<table border='1' cellpadding='5' align='center'>\n <tr><th>Network ID</th>"
         . "<th>Network Owner</th>"
         . "<th>Number of Subnets</th><th>Description</th></tr>";
 

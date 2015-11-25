@@ -5,10 +5,13 @@ require_once("include/inc_database_info.php");
 
 <link rel="stylesheet" type="text/css" href="style.css" media="screen">
 <div id="main">
-    <?php include('include/inc_header.html') ?><br>
-    <h3>Network Created</h3><br>
-    <?php include('include/inc_footer.html') ?>
+    <?php include('include/inc_header.html') ?>
     
+    <form name ="view_topology" action="view_subnet.php" method="post">
+        <h3>Network has been created!!!</h3>
+        <button name="topologyNumber"> View Created Topology </button>        
+    </form>
+    <?php include('include/inc_footer.html') ?>
 </div>
     
 <?php
