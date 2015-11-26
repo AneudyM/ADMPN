@@ -1,24 +1,15 @@
 <form name="input_questionnaire" action="questionnaire.php" method="post">
     <h2> Answer the following questions based on you Network needs: </h2> 
     
-    <h3>Switching and Routing Information</h3>
-        <p> Amount of Workstations required: <input type="text" name="number_workstations" /></p>
-        <blockquote> 
-        <p> Is this network expanding? <input type="checkbox" name="netowrk_expansion" /></p>
-        </blockquote>
-    <p> Number of Deparments: <input type="text" name="number_vlan" /></p>
+    <p> Topology Name: <input type="text" name="name_topology" /></p>
     
-    <p> VOIP: <input type="checkbox" onclick="hide('phones')" name="voip" /></p>
-    <p id="phones"> Qty of Phones: <input type="text" name="phones" /></p>
-    <p> Number of Public IP's: <input type="text" name="public_ip" /></p>
-   
-    <h3> Firewall Information </h3>
-    <p> Would a remote site be implemented <input type="checkbox" name="remote_location" /></p>
-    <p> Ports to be opened? <input type="text" name="ports_opened" /> </p>
-    <p> <b>Access List </b>  </p>
-    <p> Range of IP's <input type="text" name='access_lists' /> </p>
-    <p> IDS <input type="checkbox" name="IDS" /></p>
-    <p> IPS <input type="checkbox" name="IPS" /></p>
+    <p> Number of Deparments: <input type="text" id="number_departments" name="number_vlan" /></p>
+    <!--
+    Dynamic introduction de:
+    Department Name... # of Hosts .. IP address
+    (Vlan Description) .. Create this mount of nodes WS in DB... Vlan IP-Network Address
+    Vlan # automatico    
+    -->
     
     <h3> Additional Services </h3>
     <p> SSH <input type="checkbox" name="ssh" /></p>
@@ -28,25 +19,7 @@
     <p> IM Server <input type="checkbox" name="IM" /></p>
     <p> Mail Server <input type="checkbox" name="mail" /></p>
     <p> Wireless Services? <input type="checkbox" name="wireless_AP" /></p>
+    <!-- Add this services in the table
+    -->
     
-    <button name="submit_topology"> Create Network Topology </button>
-      
-    <script>
-        var hide_element = true;
-        
-        function hide(obj) {
-            var hide;
-            if (hide_element) {
-                hide = document.getElementById(obj);
-                hide.style.visibility = "hidden";
-                hide_element = false;
-            }
-            else {
-                hide = document.getElementById(obj);
-                hide.style.visibility = "visible";
-                hide_element = true;
-            }
-        
-        }
-    </script>
 </form>

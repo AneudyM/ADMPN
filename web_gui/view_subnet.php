@@ -5,11 +5,19 @@ require_once("include/inc_database_info.php");
 <link rel="stylesheet" type="text/css" href="style.css" media="screen">
 <div id="main">
     <?php include('include/inc_header.html') ?><br>
-    <h3>View Network Topology</h3>
+    <h3>View Network Topologies</h3>
     
-    
-    <?php
+    <?php 
     $networkID = $_GET['network'];
+    if (isset($_POST['topologyNumber'])){
+        $networkID = 3; //How to bring that?
+    }
+    if(isset($_POST['newTopology'])){
+       $newTopology =  $_POST['getID'];
+       include ('include/inc_questionnaire.html');
+    }
+    
+    
     $sqlstring = "Select networkOwner from NETWORK where networkId='$networkID'"; 
     $queryResult = $DBConnect->query($sqlstring); 
     $sqlTopology = "select * from TOPOLOGY where NETWORK_networkId='$networkID'";

@@ -15,9 +15,28 @@ if ($DBConnect->connect_errno){
 <?php
     $networkOwner = $_POST['networkOwner'];
     $networkDescription = $_POST['networkDescription'];
-    $TableName = "NETWORK";
-    $sqlString = "INSERT INTO $TableName(networkOwner, networkDescription) VALUES('$networkOwner', '$networkDescription')";
+    $sqlString = "INSERT INTO NETWORK(networkOwner, networkDescription) VALUES"
+            . "('$networkOwner', '$networkDescription')";
     $queryResult = $DBConnect->query($sqlString);
+    
+    $sqlselectID = "select networkId from NETWORK 
+    order by networkId desc
+    limit 1" ;    
+    $queryResultID = $DBConnect->query($sqlselectID);
+    $rowID  = $queryResultID->fetch_array();
+    
+    $sqlpublicIP = "Select * from PUBLIC_IP_POOL where available='1'"
+            . "limit 1";    
+    $queryPublicIP = $DBConnect->query($sqlpublicIP);
+    $rowIP = $queryPublicIP->fetch_array();
+    
+    $sqlassignIP = "Update NETWORK set publicIPAddress='".$rowIP['publicIP']."' "
+            . "where networkId=".$rowID['networkId']."";
+    $queryassignIP = $DBConnect->query($sqlassignIP);
+    
+    $sqlnotavaiIP = "Update PUBLIC_IP_POOL set available='0' where "
+            . "id=".$rowIP['id']." ";    
+    $querynoAvail = $DBConnect->query($sqlnotavaiIP);
     
     include ('include/inc_header.html');
     echo "<br>";
@@ -26,6 +45,7 @@ if ($DBConnect->connect_errno){
     echo "Description: <b>".$networkDescription."</b>.";
     include ('include/inc_questionnaire.html');
    
+    //Take on of the available Public IP addresses from the POOL table.
 ?>
 </div>
 
