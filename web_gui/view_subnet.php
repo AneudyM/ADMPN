@@ -10,10 +10,9 @@ require_once("include/inc_database_info.php");
     <?php 
     $networkID = $_GET['network'];
     if (isset($_POST['topologyNumber'])){
-        $networkID = 3; //How to bring that?
+        $networkID = $_POST['getID']; 
     }
     if(isset($_POST['newTopology'])){
-       $newTopology =  $_POST['getID'];
        include ('include/inc_questionnaire.html');
     }
     
@@ -44,6 +43,7 @@ require_once("include/inc_database_info.php");
     }
     
     echo "</table>";
+    
     ?>  
     
     <br><br>

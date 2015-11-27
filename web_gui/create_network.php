@@ -44,8 +44,7 @@ if ($DBConnect->connect_errno){
     echo "<br>";
     echo "Description: <b>".$networkDescription."</b>.";
     include ('include/inc_questionnaire.html');
-   
-    //Take on of the available Public IP addresses from the POOL table.
+    
 ?>
 </div>
 
