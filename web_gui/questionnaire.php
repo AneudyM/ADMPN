@@ -55,8 +55,6 @@ while ($i < 7){
         
     }
     
-    else
-    {echo"Eroo";}
     $i++;
 }
 
