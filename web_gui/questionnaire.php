@@ -26,7 +26,7 @@ $nameTopology = "Insert into TOPOLOGY(topologyName,topologyIP, topologyNetmask,"
 $querynameTopology = $DBConnect->query($nameTopology);
 
 //Getting the TopologyID
-$topologyID = "select * from TOPOLOGY 
+$topologyID = "select topologyId from TOPOLOGY 
     order by topologyId desc
     limit 1" ;
 $resultTopID = $DBConnect->query($topologyID);

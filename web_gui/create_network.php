@@ -10,8 +10,15 @@ if ($DBConnect->connect_errno){
 }
 ?>
 
-<link rel="stylesheet" type="text/css" href="style.css" media="screen">
+<link rel="styles<?php
+if ($DBConnect->connect_errno){
+    echo "<p> Unable to connect to DB. </p>"
+    ."<p> Error Code ".$DBConnect->connect_errno
+     .       ": ". $DBConnect->connect_error . "</p>\n";
+}
+?>heet" type="text/css" href="style.css" media="screen">
 <div id="main">
+    
 <?php
     $networkOwner = $_POST['networkOwner'];
     $networkDescription = $_POST['networkDescription'];
