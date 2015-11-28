@@ -1,33 +1,47 @@
+<link rel="stylesheet" type="text/css" href="style.css" media="screen">
 <form name="input_questionnaire" action="questionnaire.php" method="post">
+    
     <h2> Answer the following questions based on you Network needs: </h2> 
     
     <p> Topology Name: <input type="text" name="name_topology" /></p>
     
-    <p> Number of Deparments: <input type="text" id="number_departments" name="number_vlan" /></p>
-    
-   
-    <!--
-    Dynamic introduction de:
-    Department Name... # of Hosts .. IP address
-    (Vlan Description) .. Create this mount of nodes WS in DB... Vlan IP-Network Address
-    Vlan # automatico    
-    -->
+    <p> Number of Deparments: <input type="text" id="number_departments" 
+                                     name="number_vlan" /></p>
+
+   <div id="mainScreen">
+       <input name="dptName_i" type="text"/>
+       <input name="noHost_i" type="text" />
+       <input name="ipRange_i" type="text" /> 
+       <input type="button" name="botonVlan" id="addRow" onclick="addRow()" 
+              value="New Department"/><br>
+   </div>
     
     <h3> Additional Services </h3>
-    <p> SSH <input type="checkbox" name="ssh" /></p>
-    <p> Telnet <input type="checkbox" name="telnet" /></p>
-    <p> Web Server <input type="checkbox" name="http" /></p>
-    <p> FTP Server <input type="checkbox" name="FTP" /></p>
-    <p> IM Server <input type="checkbox" name="IM" /></p>
-    <p> Mail Server <input type="checkbox" name="mail" /></p>
-    <p> Wireless Service <input type="checkbox" name="wireless_AP" /></p>
+    <p> SSH <input type="checkbox" name="ssh" value="SSH" /></p>
+    <p> Telnet <input type="checkbox" name="telnet" value="Telner" /></p>
+    <p> Web Server <input type="checkbox" name="http" value="Web Server" /></p>
+    <p> FTP Server <input type="checkbox" name="ftp" value="FTP Server"/></p>
+    <p> IM Server <input type="checkbox" name="imServer"  value="IM Server"/></p>
+    <p> Mail Server <input type="checkbox" name="mail" value="Mail Server"/></p>
+    <p> Wireless Service <input type="checkbox" name="wireless_AP" value="Wireless Services" /></p>
     
     <button name="submit_topology"> Create Network Topology </button>
 
 </form>
 
-
-
-<script>
- 
+ <script type="text/javascript">
+        var i = 0;
+        function addRow(){
+            if (i < 2){
+                var node = document.createElement("div");
+                node.innerHTML = '<input name="dptName_'+i+'" type="text"/> \n\
+                <input name="noHost_'+i+'" type="text" />\n\
+                <input name="ipRange_'+i+'" type="text" /> \n\
+                <input type="button" name="botonVlan" id="addRow" \n\
+                onclick="addRow()" value="New Department"/><br>';
+                document.getElementById("mainScreen").appendChild(node);
+                i++;
+            }
+        }  
 </script>
+

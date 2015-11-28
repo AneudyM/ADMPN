@@ -21,8 +21,45 @@ $nameTopology = "Insert into TOPOLOGY(topologyName,NETWORK_networkId) VALUES "
         . "('$topology_name', '".$row["networkId"]."')";
 $querynameTopology = $DBConnect->query($nameTopology);
 
+//Getting the TopologyID
+$topologyID = "select topologyId from TOPOLOGY 
+    order by topologyId desc
+    limit 1" ;
+$resultTopID = $DBConnect->query($topologyID);
+$rowTopologyID  = $resultTopID->fetch_array();
+
 //Assigns services to a node.
-$sqlServices = "";
+$ssh = $_POST['ssh'];
+$telnet = $_POST['telnet'];
+$webService =  $_POST['http'];
+$ftpService =  $_POST['ftp'];
+$imService =  $_POST['imServer'];
+$mailService =  $_POST['mail'];
+$wireless =  $_POST['wireless_AP'];
+$service = array($_POST['ssh'], $_POST['telnet'], $_POST['http'], $_POST['ftp'], $_POST['imServer'], $_POST['mail'],
+        $_POST['wireless_AP']);
+$i = 0;
+
+while ($i < 7){
+    if(isset($service[$i])){
+        $insertServices = "Insert into NODE (hostname, NODE_TYPE_nodeTypeId, TOPOLOGY_topologyId, TOPOLOGY_NETWORK_networkid)"
+        . "values ('".$topology_name."_".$service[$i]."','6','".$rowTopologyID ["topologyId"]."','".$row ["networkId"]."')";
+        $DBConnect->query($insertServices);
+    
+        if ($DBConnect->connect_errno){
+            echo "<p> Unable to connect to DB. </p>"
+            ."<p> Error Code ".$DBConnect->connect_errno
+             .       ": ". $DBConnect->connect_error . "</p>\n";
+        }
+        
+        
+    }
+    
+    else
+    {echo"Eroo";}
+    $i++;
+}
+
 ?>
 
 <div id="main">
