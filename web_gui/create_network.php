@@ -25,7 +25,7 @@ if ($DBConnect->connect_errno){
     $queryResultID = $DBConnect->query($sqlselectID);
     $rowID  = $queryResultID->fetch_array();
     
-    $sqlpublicIP = "Select * from PUBLIC_IP_POOL where available='1'"
+    $sqlpublicIP = "Select publicIP from PUBLIC_IP_POOL where available='1'"
             . "limit 1";    
     $queryPublicIP = $DBConnect->query($sqlpublicIP);
     $rowIP = $queryPublicIP->fetch_array();
@@ -35,7 +35,7 @@ if ($DBConnect->connect_errno){
     $queryassignIP = $DBConnect->query($sqlassignIP);
     
     $sqlnotavaiIP = "Update PUBLIC_IP_POOL set available='0' where "
-            . "id=".$rowIP['id']." ";    
+            . "publicIP='".$rowIP['publicIP']."'";    
     $querynoAvail = $DBConnect->query($sqlnotavaiIP);
     
     include ('include/inc_header.html');

@@ -33,13 +33,13 @@ require_once("include/inc_database_info.php");
         . "<th>Description</th>"
         . "<th>Active</th></tr>";
     
-    while ($row = $queryTopology->fetch_assoc()){
-    echo"<tr><td>" . $row["topologyId"]. " <a href='update_topology.php?edit="
-            .$row["topologyId"]."'>Update Value</a> </td>
-        <td>" . $row["topologyName"]. "</td>
-        <td>" . $row["topologyIP"]. "</td>
-            <td>" . $row["topologyDescription"]. "</td>
-        <td>" . $row["topologyStatus"]. "</td></tr>\n";
+    while ($rowT = $queryTopology->fetch_assoc()){
+    echo"<tr><td>" . $rowT["topologyId"]. " <a href='update_topology.php?edit="
+            .$rowT["topologyId"]."'>Update Value</a> </td>
+        <td>" . $rowT["topologyName"]. "</td>
+        <td>" . $rowT["topologyIP"]. "</td> 
+            <td>" . $rowT["topologyDescription"]. "</td>
+        <td>" . $rowT["topologyStatus"]. "</td></tr>\n";
     }
     
     echo "</table>";
