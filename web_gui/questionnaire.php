@@ -29,35 +29,22 @@ $resultTopID = $DBConnect->query($topologyID);
 $rowTopologyID  = $resultTopID->fetch_array();
 
 //Assigns services to a node.
-$ssh = $_POST['ssh'];
-$telnet = $_POST['telnet'];
-$webService =  $_POST['http'];
-$ftpService =  $_POST['ftp'];
-$imService =  $_POST['imServer'];
-$mailService =  $_POST['mail'];
-$wireless =  $_POST['wireless_AP'];
 $service = array($_POST['ssh'], $_POST['telnet'], $_POST['http'], $_POST['ftp'], $_POST['imServer'], $_POST['mail'],
         $_POST['wireless_AP']);
 $i = 0;
-
+//Insert services into node table and assign an interface
 while ($i < 7){
     if(isset($service[$i])){
         $insertServices = "Insert into NODE (hostname, NODE_TYPE_nodeTypeId, TOPOLOGY_topologyId, TOPOLOGY_NETWORK_networkid)"
         . "values ('".$topology_name."_".$service[$i]."','6','".$rowTopologyID ["topologyId"]."','".$row ["networkId"]."')";
         $DBConnect->query($insertServices);
-    
-        if ($DBConnect->connect_errno){
-            echo "<p> Unable to connect to DB. </p>"
-            ."<p> Error Code ".$DBConnect->connect_errno
-             .       ": ". $DBConnect->connect_error . "</p>\n";
-        }
+        
         
         
     }
     
     $i++;
 }
-
 ?>
 
 <div id="main">
