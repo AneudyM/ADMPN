@@ -1,49 +1,30 @@
-<?php
-require_once("include/inc_database_info.php");
-?>
 
+<?php 
+    require_once("include/inc_database_info.php");
+    require_once("include/library.php");
+
+?>
+<link rel="stylesheet" type="text/css" href="style.css" media="screen">
 <?php
 if ($DBConnect->connect_errno){
     echo "<p> Unable to connect to DB. </p>"
     ."<p> Error Code ".$DBConnect->connect_errno
-     .       ": ". $DBConnect->connect_error . "</p>\n";
+    .": ". $DBConnect->connect_error . "</p>\n";
 }
 ?>
 
-<link rel="styles<?php
-if ($DBConnect->connect_errno){
-    echo "<p> Unable to connect to DB. </p>"
-    ."<p> Error Code ".$DBConnect->connect_errno
-     .       ": ". $DBConnect->connect_error . "</p>\n";
-}
-?>heet" type="text/css" href="style.css" media="screen">
 <div id="main">
-    
 <?php
-    $networkOwner = $_POST['networkOwner'];
+    # get the network owner and description from form
+          $networkOwner = $_POST['networkOwner'];
     $networkDescription = $_POST['networkDescription'];
-    $sqlString = "INSERT INTO NETWORK(networkOwner, networkDescription) VALUES"
-            . "('$networkOwner', '$networkDescription')";
-    $queryResult = $DBConnect->query($sqlString);
+     $availablePublicIP = getNextPublicIP($DBConnect);
+     
+    # create a database statment with information from fields
+   
     
-    $sqlselectID = "select networkId from NETWORK 
-    order by networkId desc
-    limit 1" ;    
-    $queryResultID = $DBConnect->query($sqlselectID);
-    $rowID  = $queryResultID->fetch_array();
-    
-    $sqlpublicIP = "Select publicIP from PUBLIC_IP_POOL where available='1'"
-            . "limit 1";    
-    $queryPublicIP = $DBConnect->query($sqlpublicIP);
-    $rowIP = $queryPublicIP->fetch_array();
-    
-    $sqlassignIP = "Update NETWORK set publicIPAddress='".$rowIP['publicIP']."' "
-            . "where networkId=".$rowID['networkId']."";
-    $queryassignIP = $DBConnect->query($sqlassignIP);
-    
-    $sqlnotavaiIP = "Update PUBLIC_IP_POOL set available='0' where "
-            . "publicIP='".$rowIP['publicIP']."'";    
-    $querynoAvail = $DBConnect->query($sqlnotavaiIP);
+    # Make the assigned IP unavailable
+    updatePublicIPStatus($lastNetworkID);
     
     include ('include/inc_header.html');
     echo "<br>";
@@ -51,10 +32,7 @@ if ($DBConnect->connect_errno){
     echo "<br>";
     echo "Description: <b>".$networkDescription."</b>.";
     include ('include/inc_questionnaire.html');
-    
 ?>
 </div>
 
-<?php
-$DBConnect->close();
-?> 
+<?php $DBConnect->close(); ?> 

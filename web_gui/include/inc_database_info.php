@@ -1,7 +1,7 @@
 <?php
-$error = array();
-$host = "admpns.com";
-$username = "admpns"; 
+       $error = array();
+        $host = "admpns.com";
+    $username = "admpns"; 
 $password = "Vmarvia17";
 $databaseName = "admpns";
 
