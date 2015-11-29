@@ -74,8 +74,6 @@ for($j=0; $j< $number_vlan;$j++ )
     //Needs to add the VLAN to a switch.
     
 }
-//Inserting Departments
-
 
 $DBConnect->close();
 ?>
