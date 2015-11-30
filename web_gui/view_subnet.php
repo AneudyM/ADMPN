@@ -34,7 +34,7 @@ require_once("include/inc_database_info.php");
         . "<th>Active</th></tr>";
     
     while ($rowT = $queryTopology->fetch_assoc()){
-    echo"<tr><td><a href='view_node.php?edit="
+    echo"<tr><td><a href='view_nodes.php?topologyID="
             .$rowT["topologyId"]."'>" . $rowT["topologyId"]. "</a> </td>
         <td>" . $rowT["topologyName"]. "</td>
         <td>" . $rowT["topologyIP"]. "</td> 
