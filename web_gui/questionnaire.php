@@ -63,8 +63,9 @@ for($j=0; $j< $number_vlan;$j++ )
 {
     $departmentName = $_POST['dptName_'.$j];
     $departmentHost = $_POST['noHost_'.$j];
-    $vlanIP = createVlan($DBConnect, $departmentName, $vlanIpAddress, $switchID);
     $vlanIpAddress = $topologyOctet[0].".".$topologyOctet[1].".".($j+2).".0";
+    $vlanIP = createVlan($DBConnect, $departmentName, $vlanIpAddress, $switchID);
+    
     
     for($k=0; $k<$departmentHost; $k++){
         $pcHostname = $departmentName."_".($k+1)."";
