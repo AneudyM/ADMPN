@@ -3,6 +3,7 @@
 <?php
 require_once("include/inc_database_info.php");
 require_once("include/library.php");
+session_start();
 
          $number_vlan = $_POST['number_vlan'];
        $topology_name = $_POST['name_topology'];
@@ -10,8 +11,8 @@ require_once("include/library.php");
        $topology_mask = $_POST['netmask_topology'];
 $topology_description = $_POST['description_topology'];
 
-$networkID = mysql_insert_id();
-
+$networkID = $_SESSION['networkID'];
+print $networkID;
  //Updates Netowork Table, adding the number of VLANs 
 $updateNetwork = "UPDATE NETWORK
                      SET numberOfSubnets='$number_vlan'
@@ -22,14 +23,19 @@ $DBConnect->query($updateNetwork);
 $nextPrivateIP = getNextPrivateIP($DBConnect);
 #Creates Topology
 $topologyID = createTopology($DBConnect, $topology_name, $nextPrivateIP, $topology_description, $networkID);
+print  $topologyID."\n";
 updatePrivateIPStatus($topologyID, $DBConnect);
+
 $routerHostname = $topology_name."_Router";
 $switchHostname = $topology_name."_Switch";
+print $routerHostname."\n";
+print $switchHostname."\n";
 
-$topologyIP = getTopologyIP($topologyID);
-$topologyOctet= explode('.', $topologyIP);
+$topologyIP = getTopologyIP($topologyID, $DBConnect);
+print $topologyIP."\n";
+$topologyOctet= explode(".", $topologyIP);
 $routerIP = $topologyOctet[0].".".$topologyOctet[1].".0.1";
-
+print $routerIP."\n";
 $routerID = createRouter($DBConnect, $routerHostname, $networkID, $topologyID);
 $switchID = createSwitch($switchHostname, $DBConnect, $topologyID, $networkID);
 attachInterfaceTo($routerID, $switchID, $DBConnect, $routerIP);
@@ -57,13 +63,13 @@ for($j=0; $j< $number_vlan;$j++ )
 {
     $departmentName = $_POST['dptName_'.$j];
     $departmentHost = $_POST['noHost_'.$j];
-    $vlanIpAddress = $topologyOctet[0].".".$topologyOctet[1].".".($j+1).".0";
+    $vlanIP = createVlan($DBConnect, $departmentName, $vlanIpAddress, $switchID);
+    $vlanIpAddress = $topologyOctet[0].".".$topologyOctet[1].".".($j+2).".0";
     
     for($k=0; $k<$departmentHost; $k++){
-        $pcHostname = $departmentName."_".$k."";
-        $pcID = createWorkstation($DBConnect, $pcHostname, $networkID, $topologyID);        
-        $vlanIP = createVlan($DBConnect, $departmentName, $vlanIpAddress, $switchID);
-        $vlanIPOctet = explode('.', $vlanIpAddress);
+        $pcHostname = $departmentName."_".($k+1)."";
+        $pcID = createWorkstation($DBConnect, $pcHostname, $networkID, $topologyID); 
+        $vlanIPOctet = explode(".", $vlanIpAddress);
         $pcIP = $vlanIPOctet[0].".".$vlanIPOctet[1].".".$vlanIPOctet[2].".".($k+2)."";
         attachInterfaceTo($pcID, $switchID, $DBConnect, $pcIP);
     }

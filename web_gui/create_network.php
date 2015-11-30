@@ -15,16 +15,18 @@ if ($DBConnect->connect_errno){
 
 <div id="main">
 <?php
+session_start();
+
     # get the network owner and description from form
-          $networkOwner = $_POST['networkOwner'];
+    $networkOwner = $_POST['networkOwner'];
     $networkDescription = $_POST['networkDescription'];
-     $availablePublicIP = getNextPublicIP($DBConnect);
+    $availablePublicIP = getNextPublicIP($DBConnect);
      
     # create a database statment with information from fields
-   
-    
+    $lastNetworkID = createNetwork($DBConnect, $networkOwner, $networkDescription, $availablePublicIP);
+    $_SESSION['networkID'] = $lastNetworkID;
     # Make the assigned IP unavailable
-    updatePublicIPStatus($lastNetworkID);
+    updatePublicIPStatus($lastNetworkID,$DBConnect);
     
     include ('include/inc_header.html');
     echo "<br>";

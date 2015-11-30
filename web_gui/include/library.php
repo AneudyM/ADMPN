@@ -26,16 +26,16 @@
                    SET available = 0
                  WHERE publicIP = (SELECT publicIPAddress 
                                      FROM NETWORK 
-                                    WHERE networkId = ".$networkID.")";
+                                    WHERE networkId = $networkID)";
         $execute = $DBConnect->query($sql);
     }
     
     function updatePrivateIPStatus($topologyID,$DBConnect){
         $sql = "UPDATE PRIVATE_IP_POOL 
                    SET available = 0
-                 WHERE publicIP = (SELECT publicIPAddress 
-                                     FROM NETWORK 
-                                    WHERE networkId = $topologyID)";
+                 WHERE privateIP = (SELECT topologyIP 
+                                     FROM TOPOLOGY
+                                    WHERE topologyId = $topologyID)";
         $execute = $DBConnect->query($sql);
     }
 /*
@@ -52,11 +52,12 @@
                                 '$availablePublicIP'
                            )";
         $execute = $DBConnect->query($sql);
-        $networkID  = mysql_insert_id();
+        $networkID  = $DBConnect->insert_id;
+        print $networkID;
         return $networkID;
     }
     
-    function createTopology($DBConnect,$topology_name,$nextPrivateIP,$topology_description,$networkID) {
+    function createTopology($DBConnect,$topology_name,$nextPrivateIP,$topology_description,$networkID){
         # Create topology
         $sql = "INSERT INTO TOPOLOGY (
                        topologyName,
@@ -71,10 +72,10 @@
                        '255.255.255.0',
                        1,
                        '$topology_description',
-                       '$networkID'
+                       $networkID
                 )";
         $execute = $DBConnect->query($sql);
-        $topologyID = mysql_insert_id();
+        $topologyID = $DBConnect->insert_id;
         return $topologyID;
     }
       
@@ -97,7 +98,7 @@
                        '$networkID'
             )";
         $execute = $DBConnect->query($sql);
-        $routerID = mysql_insert_id();
+        $routerID = $DBConnect->insert_id;
         return $routerID;
     }
     
@@ -117,7 +118,7 @@
                        '$networkID'
                 )";
         $execute = $DBConnect->query($sql);
-        $routerID = mysql_insert_id();
+        $routerID = $DBConnect->insert_id;
         return $routerID;
     }
    
@@ -136,7 +137,7 @@
                        '$networkID'
                 )";
         $execute = $DBConnect->query($sql);
-        $switchID = mysql_insert_id();
+        $switchID = $DBConnect->insert_id;
         return $switchID;
     }
     
@@ -155,7 +156,7 @@
                        '$networkID'
                 )";
         $execute = $DBConnect->query($sql);
-        $firewallID = mysql_insert_id();
+        $firewallID = $DBConnect->insert_id;
         return $firewallID;
     }
     
@@ -174,7 +175,7 @@
                        '$networkID'
                 )";
         $execute = $DBConnect->query($sql);
-        $switchID = mysql_insert_id();
+        $switchID = $DBConnect->insert_id;
         return $switchID;
     }
     
@@ -193,7 +194,8 @@
                        int_ip_address,
                        int_netmask,
                        int_state,
-                       NODE_nodeId
+                       NODE_nodeId,
+                       neighbor_nodeId
               ) VALUES (
                        '$ipAddress',
                        '255.255.255.0',
@@ -202,7 +204,7 @@
                        '$neighborNodeID'
               )";
         $execute = $DBConnect->query($sql);
-        $interfaceID = mysql_insert_id();
+        $interfaceID = $DBConnect->insert_id;
         return $interfaceID;
     }
     
@@ -243,9 +245,7 @@
     function getTopologyIP($topologyID,$DBConnect) {
         $sql = "SELECT topologyIP
                   FROM TOPOLOGY 
-                 WHERE topologyId = (SELECT TOPOLOGY_topologyId 
-                                       FROM NODE 
-                                      WHERE nodeId = $topologyID)";
+                 WHERE topologyId = $topologyID";
         $execute = $DBConnect->query($sql);
         $topologyIP = $execute->fetch_array(MYSQLI_NUM);
         return $topologyIP[0];
