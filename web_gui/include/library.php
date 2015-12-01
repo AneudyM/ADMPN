@@ -251,5 +251,14 @@
         return $topologyIP[0];
     }
     
+    function getNodeIP($nodeID,$DBConnect) {
+        $sql = "SELECT int_ip_address
+                  FROM INTERFACE 
+                 WHERE NODE_nodeId = $nodeID";
+        $execute = $DBConnect->query($sql);
+        $int_ip_address = $execute->fetch_array(MYSQLI_NUM);
+        return $int_ip_address[0];
+    }
+    
     
 
